@@ -1,5 +1,5 @@
 
-**Advanced Lane Finding Project**
+# **Advanced Lane Finding Project**
 
 The goals / steps of this project are the following:
 
@@ -136,14 +136,16 @@ The warping and upwarping image looked like the following
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 If we aggregate all the steps mentioned above, we get a warped binary image.
+
 ![thres_warp_summary]
 
 Here we if we plot the top of binary wrapped image with frequency of positive pixels. We can see that the two lanes are very easily detected.
+
 ![sliding_window_plot]
 
 Hence we will be using a rolling window technique to figure out pockets of screen area where lanes are present.
 
-Then we will polyfit these pixels to approximately fit a 2nd order curve from the left and right side. End result looks like this
+Then we will polyfit these pixels to approximately fit a 2nd order curve from the left and right side. End result looks like this:
 ![lane_fit_plot]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
@@ -180,4 +182,10 @@ You can also find it as project_output_3.mp4 at the root of submission.
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The problems I faced were : 
+* The combined threshold was majorly black initially. It took me great effort to balance out between HLS and gray images. Right now abs_sobel is on gray image but other two thresholds are S channel in HLS.
+* Selecting the source and destination points for warping was difficult. If I go too high in picture then on steep curves the lanes were not being marked correctly. If I make it too shallow the lines were closer to liner and loose the purpose.
+
+My pipeline will fail if:
+* There are too steep turns. This is because my src points have some approximation within which the curves will be calculated.
+* There are other features in image that cause more than two lines on a lane. Eg: Road fault, road quality. When this happens I am unsure on how the code will behave, with a possibility that the car might assume the lane to be much thinner.
