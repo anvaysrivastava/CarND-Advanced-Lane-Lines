@@ -22,6 +22,10 @@ The goals / steps of this project are the following:
 [abs_threshold]: ./output_images/writeup/abs_threshold_output.png
 [final_thresholded]: ./output_images/writeup/final_thresholded_output.png
 [warped_image]: ./output_images/writeup/warped_image.png
+[thres_warp_summary]: ./output_images/writeup/thresholding_warping_summary.png
+[sliding_window_plot]: ./output_images/writeup/sliding_window_plot.png
+[lane_fit_plot]: ./output_images/writeup/lane_fit_plot.png
+
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -130,9 +134,16 @@ The warping and upwarping image looked like the following
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+If we aggregate all the steps mentioned above, we get a warped binary image.
+![thres_warp_summary]
 
-![alt text][image5]
+Here we if we plot the top of binary wrapped image with frequency of positive pixels. We can see that the two lanes are very easily detected.
+![sliding_window_plot]
+
+Hence we will be using a rolling window technique to figure out pockets of screen area where lanes are present.
+
+Then we will polyfit these pixels to approximately fit the curve from the left and right side. End result looks like this
+![lane_fit_plot]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
