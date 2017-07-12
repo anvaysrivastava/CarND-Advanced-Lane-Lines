@@ -25,8 +25,9 @@ The goals / steps of this project are the following:
 [thres_warp_summary]: ./output_images/writeup/thresholding_warping_summary.png
 [sliding_window_plot]: ./output_images/writeup/sliding_window_plot.png
 [lane_fit_plot]: ./output_images/writeup/lane_fit_plot.png
+[final_detection]: ./output_images/detection/test4.jpg
 
-[video1]: ./project_video.mp4 "Video"
+[video1]: ./project_output_3.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
@@ -142,18 +143,25 @@ Here we if we plot the top of binary wrapped image with frequency of positive pi
 
 Hence we will be using a rolling window technique to figure out pockets of screen area where lanes are present.
 
-Then we will polyfit these pixels to approximately fit the curve from the left and right side. End result looks like this
+Then we will polyfit these pixels to approximately fit a 2nd order curve from the left and right side. End result looks like this
 ![lane_fit_plot]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+Since we now have a 2nd order curve for both left and right side. We can calculate the radii for each curve as mentioned in http://www.intmath.com/applications-differentiation/8-radius-curvature.php
+
+For calculating the position on road, we calculated the deviation of image's middle point with the left and right lane's average x axis position.
+
+For this we assumed that `720` pixels approximate 30 meters on y axis and 700 pixels correspond to 3.7 meters on x axis. These values have been taken from the course material.
+
+
+This calculation has been mentioned in `Goal 6: Determine the curvature of the lane and vehicle position with respect to center.`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I implemented this step in the function `render_lane()`.  Here is an example of my result on a test image:
 
-![alt text][image6]
+![final_detection]
 
 ---
 
@@ -161,12 +169,15 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a link to my video result https://www.youtube.com/watch?v=ZtVfJFwAwyE
+
+You can also find it as project_output_3.mp4 at the root of submission.
 
 ---
 
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
