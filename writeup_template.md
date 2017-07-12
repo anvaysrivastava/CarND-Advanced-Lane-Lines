@@ -15,8 +15,12 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./output_images/undistorted/output.png "Undistorted"
-[test_image]: ./test_images/straight_lines1.jpg "Hakuna"
-[undistorted_test_image]: ./output_images/undistorted/straight_lines1.jpg "Matata"
+[test_image]: ./test_images/straight_lines1.jpg "Test Image"
+[undistorted_test_image]: ./output_images/undistorted/straight_lines1.jpg "Undistorted Test Image"
+[mag_threshold]: ./output_images/writeup/mag_threshold_output.png
+[direction_threshold]: ./output_images/writeup/direction_threshold_output.png
+[abs_threshold]: ./output_images/writeup/abs_threshold_output.png
+[final_thresholded]: ./output_images/writeup/final_thresholded_output.png
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -58,6 +62,40 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 Notice that the hood has been pulled back during un-distortion.
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+
+I had used three thresholding 
+
+##### Absolute Sobel Threshold
+Kernel size : 3
+
+Min Threshold : 20
+
+Max Threshold : 100
+
+![abs_threshold]
+
+##### Direction Threshold
+Kernel size : 15
+
+lower Threshold : 0.7
+
+upper Threshold : 1.3
+
+![direction_threshold]
+
+#### Magnitude Threshold
+Kernel size : 5
+
+Min Threshold : 20
+
+Max Threshold : 100
+
+![mag_threshold]
+
+
+#### Final Threshold
+![final_thresholded]
+
 
 I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
